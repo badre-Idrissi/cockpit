@@ -1,0 +1,18 @@
+{
+  "name": "pressplayer",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "3.2.6",
+    "getmac": "^1.0.7",
+    "jade": "*"
+  },
+  "description": "",
+  "main": "app.js",
+  "devDependencies": {},
+  "author": "badre idrissi \"b.idrissi@gmail.com\"",
+  "license": "ISC"
+}

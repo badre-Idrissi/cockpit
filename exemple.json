@@ -1,0 +1,16 @@
+{
+    "budget": 300,
+    "ciblage": "",
+    "keywords": "Boucherie",
+    "dateDebut": "2015-01-01T00:00:00+01:00",
+    "dateFin": "2015-01-01T00:00:00+01:00",
+    "etat": "CREATED",
+    "message": {
+        "libelle": "lib",
+        "type": "flv",
+        "medias":[{"duree":10,"md5":"e0d123e5f316bef78bfdf5a008837577","nomOriginal":"glacier.webm","url":"http://demosthenes.info/assets/videos/glacier.webm"},
+        	{"duree":10,"md5":"e0d123e5f316dhjuh78bfdf5a008837500","nomOriginal":"mountain.webm","url":"http://demosthenes.info/assets/videos/mountain.webm"}],
+        "fluxTexte":{"duree":0,"positionnement":1,"skin":"mySkin","text":"Auchan publicitaire texte"}
+    },
+    "nom": "Nouvelle campagne"
+}
