@@ -40,7 +40,10 @@ app.get('/', function(req, res) {
 
 //app.get('/users', user.list);
 
-
+app.get('/foo', function() {
+	console.log('foo perforemed');
+	io.sockets.emit('msg' , 'salut ');
+});
 
 var server = http.createServer(app);
 
@@ -48,15 +51,46 @@ var server = http.createServer(app);
 var io = require('socket.io').listen(server);
 
 io.sockets.on('connection', function (socket) {
-	console.log('client connected ');
-	io.sockets.emit('initPlayList' , 'glacier.webm,bunny.webm,small.webm');
-});
+	console.log('Un client est connecté !');
 
+	socket.on('message', function (message) {
+		console.log('message from client :' + message );
+	});
+
+});
 
 server.listen(app.get('port'), function(){
 	console.log('Express server listening on port ' + app.get('port'));
+
+	//require('./mq/campaignConsumer');
 });
 
+///RabbitMq listener
+
+var amqp = require('amqp');
+
+var connection = amqp.createConnection({ host: 'dev.rabbitmq.com' });
+var vl = new videoDownloader('./v.webm');
+
+connection.on('ready', function () {
+	console.log('connection ready');
+	connection.queue('Badre.IN.QUEUE', function (q) {
+		// Catch all messages
+		q.bind('#');
+		// Receive messages
+		q.subscribe(function (message) {
+			// Print messages to stdout
+			console.log('message');
+			var campaign = JSON.parse(message.data.toString());
+			vl.downlodFile(campaign.message.medias.url,campaign.message.medias.nomOriginal, postDownload);
+		});
+	});
+});
+
+function postDownload(filename) {
+	console.log('callback ok');
+	io.sockets.emit('msg' , filename);
+}
 
 
 
